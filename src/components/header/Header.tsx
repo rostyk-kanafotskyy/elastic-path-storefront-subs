@@ -7,6 +7,7 @@ import { AccountMenu } from "./account/AccountMenu";
 import { AccountSwitcher } from "./account/AccountSwitcher";
 import { Cart } from "../cart/CartSheet";
 
+
 const Header = (): JSX.Element => {
   return (
     <div className="sticky z-40 border-b border-gray-200 bg-white p-4">
@@ -27,6 +28,7 @@ const Header = (): JSX.Element => {
           </Suspense>
         </div>
         <div className="flex items-center self-center gap-x-2">
+          
           <AccountMenu accountSwitcher={<AccountSwitcher />} />
           <Cart />
         </div>

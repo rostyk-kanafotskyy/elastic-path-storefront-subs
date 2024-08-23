@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@elasticpath/js-sdk": "5.0.0",
-    "@elasticpath/react-shopper-hooks": "0.14.0",
+    "@elasticpath/react-shopper-hooks": "0.14.2",
     "clsx": "^1.2.1",
     "cookies-next": "^4.0.0",
     "focus-visible": "^5.2.0",

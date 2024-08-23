@@ -4,6 +4,7 @@ import {
   useVariationProduct,
   VariationProduct,
   VariationProductProvider,
+  useCartAddSubscriptionItem,
 } from "@elasticpath/react-shopper-hooks";
 import ProductVariations from "./ProductVariations";
 import ProductCarousel from "../carousel/ProductCarousel";
@@ -11,6 +12,13 @@ import ProductSummary from "../ProductSummary";
 import ProductDetails from "../ProductDetails";
 import ProductExtensions from "../ProductExtensions";
 import { StatusButton } from "../../button/StatusButton";
+import ProductSubscriptions from "../subscriptions/ProductSubscribtion";
+import { useCallback, useContext } from "react";
+import { SubscriptionContext } from "../../../lib/subscription-context";
+import {
+  FormSelectedOptions,
+  formSelectedOptionsToData,
+} from "../bundles/form-parsers";
 
 export const VariationProductDetail = ({
   variationProduct,
@@ -26,10 +34,31 @@ export const VariationProductDetail = ({
 
 export function VariationProductContainer(): JSX.Element {
   const { product } = useVariationProduct();
-  const { mutate, isPending } = useCartAddProduct();
+  const { mutate: mutateProduct, isPending: isPendingProduct } =
+    useCartAddProduct();
+  const { mutate: mutateSubs, isPending: isPendingSubs } =
+    useCartAddSubscriptionItem();
+
+  const isPending = isPendingProduct || isPendingSubs;
+  const { planId, offeringId } = useContext(SubscriptionContext);
 
   const { response, main_image, otherImages } = product;
   const { extensions } = response.attributes;
+
+  const handleAddToCart = useCallback(async () => {
+    if (offeringId && planId) {
+      mutateSubs({
+        id: offeringId,
+        subscription_configuration: {
+          plan: planId,
+        },
+        quantity: 1,
+      });
+    } else {
+      mutateProduct({ productId: response.id, quantity: 1 });
+    }
+  }, [response.id, mutateProduct, mutateSubs, offeringId, planId]);
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
@@ -43,11 +72,13 @@ export function VariationProductContainer(): JSX.Element {
             <ProductSummary product={response} />
             <ProductVariations />
             <ProductDetails product={response} />
+            {/*TODO: make this an optional part in CLI */}
+            <ProductSubscriptions product={response} />
             {extensions && <ProductExtensions extensions={extensions} />}
             <StatusButton
               disabled={product.kind === "base-product"}
               type="button"
-              onClick={() => mutate({ productId: response.id, quantity: 1 })}
+              onClick={handleAddToCart}
               status={isPending ? "loading" : "idle"}
             >
               ADD TO CART

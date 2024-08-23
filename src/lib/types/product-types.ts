@@ -1,5 +1,7 @@
 import type { ProductResponse, File } from "@elasticpath/js-sdk";
 import type { Dispatch, SetStateAction } from "react";
+import { CartAddSubscriptionItemReq } from "@elasticpath/react-shopper-hooks";
+import { SubscriptionContext } from "../cart-product-type-context";
 
 export type IdentifiableBaseProduct = ProductResponse & {
   id: string;
@@ -28,4 +30,16 @@ export interface ProductResponseWithImage extends ProductResponse {
 
 export interface ProductImageObject {
   [key: string]: File;
+}
+
+export interface CartProductTypeContext {
+  isChangingSku: boolean;
+  setIsChangingSku: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface SubscriptionContextState {
+  offeringId?: string;
+  planId?: string;
+  setOfferingId: Dispatch<SetStateAction<string>>;
+  setPlanId: Dispatch<SetStateAction<string>>;
 }

@@ -5,6 +5,7 @@ import { VariationProductDetail } from "../../../../components/product/variation
 import BundleProductDetail from "../../../../components/product/bundles/BundleProduct";
 import { ProductContext } from "../../../../lib/product-context";
 import SimpleProductDetail from "../../../../components/product/SimpleProduct";
+import { SubscriptionContext } from "../../../../lib/subscription-context";
 
 export function ProductProvider({
   children,
@@ -12,6 +13,8 @@ export function ProductProvider({
   children: ReactNode;
 }): ReactElement {
   const [isChangingSku, setIsChangingSku] = useState(false);
+  const [planId, setPlanId] = useState<string>();
+  const [offeringId, setOfferingId] = useState<string>();
 
   return (
     <ProductContext.Provider
@@ -20,7 +23,16 @@ export function ProductProvider({
         setIsChangingSku,
       }}
     >
-      {children}
+      <SubscriptionContext.Provider
+        value={{
+          planId,
+          offeringId,
+          setOfferingId,
+          setPlanId,
+        }}
+      >
+        {children}
+      </SubscriptionContext.Provider>
     </ProductContext.Provider>
   );
 }

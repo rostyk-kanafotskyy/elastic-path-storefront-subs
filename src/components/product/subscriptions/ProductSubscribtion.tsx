@@ -53,11 +53,11 @@ const ProductSubscriptions = ({
 
   const handlePurchaseOptionChange = (option: string) => {
     setPurchaseOption(option);
-    if (setOfferingId !== oneTimePurchasesKey) {
+    if (option !== oneTimePurchasesKey) {
       setOfferingId(option);
     } else {
-      setOfferingId();
-      setPlanId();
+      setOfferingId(undefined);
+      setPlanId(undefined);
     }
   };
 
@@ -92,7 +92,7 @@ const ProductSubscriptions = ({
             <Price
               price={display_price.without_tax.formatted}
               currency={display_price.without_tax.currency}
-              size="text-2xl"
+              size="text-base	text-gray-700 font-medium mt-0"
             />
           )}
         </div>

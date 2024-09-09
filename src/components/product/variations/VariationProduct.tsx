@@ -76,7 +76,10 @@ export function VariationProductContainer(): JSX.Element {
             <ProductSubscriptions product={response} />
             {extensions && <ProductExtensions extensions={extensions} />}
             <StatusButton
-              disabled={product.kind === "base-product"}
+              disabled={
+                product.kind === "base-product" ||
+                (offeringId ? !planId : false)
+              }
               type="button"
               onClick={handleAddToCart}
               status={isPending ? "loading" : "idle"}

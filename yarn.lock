@@ -1055,10 +1055,10 @@
     node-localstorage "^2.1.6"
     throttled-queue "^2.1.4"
 
-"@elasticpath/react-shopper-hooks@0.14.2":
-  version "0.14.2"
-  resolved "https://registry.yarnpkg.com/@elasticpath/react-shopper-hooks/-/react-shopper-hooks-0.14.2.tgz#a272c6016de1dbb7942923994399b51dce7386c0"
-  integrity sha512-MWjKjt7CcILYdKNfzSd7SMszJiify3TmjB7S1uplXtiRv24s6jv2v+5atII9dC09Kr0J8IOpo/huj5CXlXtiKw==
+"@elasticpath/react-shopper-hooks@0.14.3":
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/@elasticpath/react-shopper-hooks/-/react-shopper-hooks-0.14.3.tgz#23df980b23f4fe409e5a5402a3bbe565f9e1c41d"
+  integrity sha512-51u22RkfFbnJp+PyNXnV2RdSFKFy+Suyiej//tRSD7wbW5FR805ldx/3jgcvurAQ+9ltDjQp7Qvx11NFUaXzwg==
   dependencies:
     "@elasticpath/shopper-common" "0.4.0"
     js-cookie "^3.0.5"
